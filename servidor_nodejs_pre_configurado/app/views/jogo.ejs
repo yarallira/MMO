@@ -57,6 +57,13 @@
 		</nav>
 
 	    <div class="container">
+
+			<% if(comando_invalido == 'S'){%>
+		<div class="alert alert-danger">
+			<strong>Operação inválida, verifique se todos os campos foram informados!</strong>
+		</div>
+		<% } %>
+		
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
