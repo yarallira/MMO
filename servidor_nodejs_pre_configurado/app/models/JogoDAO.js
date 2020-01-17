@@ -1,7 +1,7 @@
 function JogoDAO(connection){
     this._connection = connection();
 }
-
+// Yara
 JogoDAO.prototype.gerarParametros = function(usuario){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection("jogo", function(err, collection){
