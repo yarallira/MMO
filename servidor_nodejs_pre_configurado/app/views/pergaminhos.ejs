@@ -2,6 +2,9 @@
 	<h3>Pergaminhos</h3>
 	
 	<ul>
+		<% for(var i = 0; i < acoes.length; i++){ %>
+		<li><%=acoes[i].quantidade%> <%=acoes[i].acao%></li>
+		<% } %>
 		<li>1 enforcamento(s) programado - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
 		<li>2 aldeão(ões) em treinamento de magia - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
 		<li>1 aldeão(ões) em treinamento de história - <small>restam 00000 segundos - <a href="#">revogar ordem</a></small></li>
