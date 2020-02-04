@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectID;
+
 function JogoDAO(connection) {
     this._connection = connection();
 }
@@ -46,11 +48,12 @@ JogoDAO.prototype.acao = function (acao) {
                 case 2: tempo = 2 * 60 * 60000; break;
                 case 3: tempo = 5 * 60 * 60000; break;
                 case 4: tempo = 5 * 60 * 60000; break;
+                case 5: tempo = 1 * 60 * 60000; break;
             }
 
             acao.acao_termina_em = date.getTime() + tempo;
             collection.insert(acao);
-          
+
         });
 
         mongoclient.collection("jogo", function (err, collection) {
@@ -61,14 +64,15 @@ JogoDAO.prototype.acao = function (acao) {
                 case 2: moedas = -3 * acao.quantidade; break;
                 case 3: moedas = -1 * acao.quantidade; break;
                 case 4: moedas = -1 * acao.quantidade; break;
+                case 5: moedas = 20 * acao.quantidade; break;
             }
 
             collection.update(
-                {usuario: acao.usuario},
-                {$inc: {moeda: moedas}}
-                );
+                { usuario: acao.usuario },
+                { $inc: { moeda: moedas } }
+            );
 
-                mongoclient.close();
+            mongoclient.close();
         });
     });
 }
@@ -87,6 +91,21 @@ JogoDAO.prototype.getAcoes = function (usuario, res) {
                 mongoclient.close();
 
             });
+        });
+    })
+
+}
+
+JogoDAO.prototype.revogarAcao = function (_id, res) {
+    this._connection.open(function (err, mongoclient) {
+        mongoclient.collection("acao", function (err, collection) {
+            collection.remove(
+                { _id: ObjectID(_id) },
+                function (err, result) {
+                    res.redirect("jogo?msg=D")
+                    mongoclient.close();
+                }
+            )
         });
     })
 
