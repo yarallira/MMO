@@ -11,10 +11,12 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "consign": "^0.1.2",
+    "crypto": "^1.0.1",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-session": "^1.17.0",
     "express-validator": "^2.20.8",
+    "install": "^0.13.0",
     "mongodb": "^2.2.9"
   }
 }
